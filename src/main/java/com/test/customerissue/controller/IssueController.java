@@ -38,11 +38,6 @@ public class IssueController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deletePost(@PathVariable("id") Integer id) {
 
-        //boolean isRemoved = issueService.deleteIssue(id);
-
-//        if (!issueService.deleteIssue(id)) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
 
         return new ResponseEntity(id, HttpStatus.OK);
     }
