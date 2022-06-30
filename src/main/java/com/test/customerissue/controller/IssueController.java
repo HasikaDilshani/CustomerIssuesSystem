@@ -36,11 +36,16 @@ public class IssueController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Integer> deletePost(@PathVariable("id") Integer id) {
-
-
-        return new ResponseEntity(id, HttpStatus.OK);
+    public void deleteIssue(@PathVariable(value = "id") Integer issueId) {
+         issueService.deleteIssue(issueId);
     }
 
+
+    @PutMapping("/updateIssue/{id}")
+    public String replaceIssue(@RequestBody Issue newIssue,@PathVariable("id") Integer id) {
+
+        issueService.updateIssue(id,newIssue);
+        return "updated";
+    }
 
 }

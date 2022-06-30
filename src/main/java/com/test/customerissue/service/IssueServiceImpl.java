@@ -35,4 +35,21 @@ public class IssueServiceImpl implements IssueService {
           issueRepository.deleteById(id);
         //return issue;
     }
+
+    @Override
+    public Issue updateIssue(Integer id,Issue newIssue) {
+        return issueRepository.findById(id)
+        .map(issue -> {
+            issue.setCustomerId(newIssue.getCustomerId());
+            issue.setCreatedDate(newIssue.getCreatedDate());
+            issue.setState(newIssue.getState());
+            issue.setDescription(newIssue.getDescription());
+            issue.setType(newIssue.getType());
+            return issueRepository.save(issue);
+        })
+                .orElseGet(() -> {
+                    newIssue.setId(id);
+                    return issueRepository.save(newIssue);
+                });
+    }
 }
